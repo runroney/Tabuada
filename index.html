@@ -634,6 +634,37 @@
                     <div id="new-game-warning" class="hidden mt-3 text-sm font-black text-rose-600">
                         ⚠️ Isso apaga moedas, roupas, casa e conquistas. Toque de novo em "Começar de novo" para confirmar.
                     </div>
+                    <button type="button" onclick="toggleQuickConfigOnSavePanel()" class="mt-3 px-4 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-sky-300 text-sky-800 font-extrabold text-xs cursor-pointer shadow-xs">
+                        ⚙️ Mudar personagem, operações ou números sem perder o progresso
+                    </button>
+                    <div id="save-quick-config" class="hidden mt-3 pt-3 border-t border-emerald-200 text-left space-y-2.5">
+                        <div>
+                            <div class="text-[11px] font-black uppercase text-slate-600 mb-1">Personagem:</div>
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+                                <button type="button" onclick="selectStartCharacter('menino'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">👦 Menino</button>
+                                <button type="button" onclick="selectStartCharacter('menina'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">👧 Menina</button>
+                                <button type="button" onclick="selectStartCharacter('capivara'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">🦫 Capivara</button>
+                                <button type="button" onclick="selectStartCharacter('gato'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">🐱 Gato</button>
+                                <button type="button" onclick="selectStartCharacter('dinossauro'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">🦖 Dino</button>
+                                <button type="button" onclick="selectStartCharacter('robo'); updateStartSavePanel();" class="p-1.5 rounded-xl bg-white border-2 border-slate-200 hover:border-sky-400 text-center text-xs font-black cursor-pointer">🤖 Robô</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-black uppercase text-slate-600 mb-1">Operações ativas:</div>
+                            <div id="save-ops-grid" class="grid grid-cols-3 gap-1.5"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[11px] font-black uppercase text-slate-600">Números (1 a 10):</span>
+                                <div class="flex gap-1">
+                                    <button type="button" onclick="setTablesPreset('all'); updateStartSavePanel();" class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 text-[10px] font-black cursor-pointer">Todas</button>
+                                    <button type="button" onclick="setTablesPreset('easy'); updateStartSavePanel();" class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 text-[10px] font-black cursor-pointer">1 a 5</button>
+                                    <button type="button" onclick="setTablesPreset('hard'); updateStartSavePanel();" class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 text-[10px] font-black cursor-pointer">6 a 10</button>
+                                </div>
+                            </div>
+                            <div id="save-tables-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-1.5"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -867,7 +898,7 @@
                 <button onclick="closeModal('settings-modal')" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 font-black cursor-pointer">✕</button>
             </div>
             <div class="p-5 space-y-4 overflow-y-auto">
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     <button onclick="closeModal('settings-modal'); openModal('missions-modal');" class="p-2.5 rounded-2xl bg-emerald-100 hover:bg-emerald-200 border-2 border-emerald-300 text-emerald-900 font-black text-xs text-center cursor-pointer">
                         <div class="text-xl mb-0.5">📋</div>
                         Missões
@@ -879,6 +910,10 @@
                     <button onclick="closeModal('settings-modal'); openModal('wardrobe-modal');" class="p-2.5 rounded-2xl bg-purple-100 hover:bg-purple-200 border-2 border-purple-300 text-purple-900 font-black text-xs text-center cursor-pointer">
                         <div class="text-xl mb-0.5">👕</div>
                         Roupas
+                    </button>
+                    <button onclick="returnToStartScreen()" class="p-2.5 rounded-2xl bg-sky-100 hover:bg-sky-200 border-2 border-sky-300 text-sky-900 font-black text-xs text-center cursor-pointer">
+                        <div class="text-xl mb-0.5">🏠</div>
+                        Menu Inicial
                     </button>
                 </div>
 
@@ -8109,7 +8144,7 @@
             { id: 'add', label: '➕ Adição' },
             { id: 'sub', label: '➖ Subtração' }
         ];
-        ['start-ops-grid', 'modal-ops-grid'].forEach(gridId => {
+        ['start-ops-grid', 'modal-ops-grid', 'save-ops-grid'].forEach(gridId => {
             const grid = document.getElementById(gridId);
             if (!grid) return;
             grid.innerHTML = '';
@@ -8132,6 +8167,7 @@
                     saveGameState();
                     renderOperationButtons();
                     updateHUD();
+                    updateStartSavePanel();
                 };
                 grid.appendChild(btn);
             });
@@ -8140,7 +8176,7 @@
 
     function renderTableButtons() {
         renderOperationButtons();
-        ['start-tables-grid', 'modal-tables-grid'].forEach(gridId => {
+        ['start-tables-grid', 'modal-tables-grid', 'save-tables-grid'].forEach(gridId => {
             const grid = document.getElementById(gridId);
             if (!grid) return;
             grid.innerHTML = '';
@@ -8164,6 +8200,7 @@
                     saveGameState();
                     renderTableButtons();
                     updateHUD();
+                    updateStartSavePanel();
                 };
                 grid.appendChild(btn);
             }
@@ -8569,13 +8606,18 @@
             return;
         }
         document.getElementById('save-summary-name').textContent = CHARACTER_LABELS[gameState.character] || 'Seu personagem';
+        const opsMap = { mul: '×', add: '+', sub: '-' };
+        const opsTag = (gameState.selectedOps || ['mul']).map(o => opsMap[o] || o).join(' ');
+        const tbls = gameState.selectedTables || [];
+        const tblTag = tbls.length === 10 ? '1 a 10' : tbls.join(', ');
         const chip = (txt, cls) => `<span class="px-3 py-1 rounded-full ${cls}">${txt}</span>`;
         document.getElementById('save-summary-stats').innerHTML = [
             chip(`🏁 Fase ${Math.min(10, gameState.phase || 1)}/10`, 'bg-sky-100 text-sky-800'),
             chip(`🪙 ${gameState.coins || 0} moedas`, 'bg-amber-100 text-amber-800'),
             chip(`⭐ ${gameState.stars || 0} estrelas`, 'bg-yellow-100 text-yellow-800'),
             chip(`✅ ${gameState.totalHits || 0} acertos`, 'bg-emerald-100 text-emerald-800'),
-            chip(`👕 ${Math.max(0, (gameState.unlockedItems || []).length - 2)} itens`, 'bg-purple-100 text-purple-800')
+            chip(`👕 ${Math.max(0, (gameState.unlockedItems || []).length - 2)} itens`, 'bg-purple-100 text-purple-800'),
+            chip(`🧮 [${opsTag}] N° ${tblTag}`, 'bg-indigo-100 text-indigo-800')
         ].join('');
         const dateEl = document.getElementById('save-summary-date');
         if (gameState.lastSavedAt) {
@@ -8586,6 +8628,14 @@
         }
         panel.classList.remove('hidden');
         setup.classList.add('hidden');
+    }
+
+    function toggleQuickConfigOnSavePanel() {
+        soundManager.playSFX('click');
+        const box = document.getElementById('save-quick-config');
+        if (!box) return;
+        box.classList.toggle('hidden');
+        renderTableButtons();
     }
 
     function continueSavedGame() {
@@ -8616,6 +8666,17 @@
         soundManager.playSFX('click');
         document.getElementById('start-save-panel').classList.add('hidden');
         document.getElementById('start-setup').classList.remove('hidden');
+    }
+
+    function returnToStartScreen() {
+        soundManager.playSFX('click');
+        autoSaveNow();
+        closeModal('settings-modal');
+        isGameStarted = false;
+        document.getElementById('game-hud').classList.add('hidden');
+        document.getElementById('start-screen').classList.remove('hidden');
+        updateStartSavePanel();
+        updateCharPreviewScene();
     }
 
     function startGame(isContinue = false) {
