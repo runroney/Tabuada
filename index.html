@@ -137,7 +137,8 @@
             background: #94a3b8;
             border-radius: 10px;
         }
-        @media (max-width: 768px) {
+        /* Celular em Retrato (vertical) */
+        @media (max-width: 768px) and (orientation: portrait) {
             #hud-top-bar {
                 transform: scale(0.84);
                 transform-origin: top center;
@@ -159,7 +160,7 @@
                 height: 70px !important;
             }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 480px) and (orientation: portrait) {
             #hud-top-bar {
                 transform: scale(0.76);
                 transform-origin: top center;
@@ -175,6 +176,259 @@
                 transform-origin: bottom center;
                 width: 128.2%;
                 margin-left: -14.1%;
+            }
+        }
+
+        /* Celular em Paisagem (deitado / horizontal - altura <= 540px) */
+        @media (orientation: landscape) and (max-height: 540px) {
+            #game-hud {
+                padding: 6px calc(12px + env(safe-area-inset-right, 0px)) 6px calc(12px + env(safe-area-inset-left, 0px)) !important;
+            }
+            /* Barra superior bem compacta em 1 linha */
+            #hud-top-bar {
+                align-items: center !important;
+                gap: 6px !important;
+            }
+            #hud-top-left {
+                max-width: none !important;
+                flex-wrap: nowrap !important;
+                gap: 4px !important;
+            }
+            #hud-top-left > button,
+            #hud-top-left > div {
+                height: 32px !important;
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+                font-size: 11px !important;
+                border-radius: 11px !important;
+            }
+            #hud-top-left > button:nth-child(1),
+            #hud-top-left > button:nth-child(2) {
+                width: 32px !important;
+                padding: 0 !important;
+                font-size: 14px !important;
+            }
+            #hud-top-right {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 5px !important;
+            }
+            #hud-stars-pill, #hud-coins-pill {
+                height: 32px !important;
+                padding: 0 9px !important;
+                border-radius: 11px !important;
+            }
+            #hud-stars-pill span:first-child,
+            #hud-coins-pill span:first-child {
+                font-size: 14px !important;
+            }
+            #hud-stars, #hud-coins {
+                font-size: 13px !important;
+            }
+            #hud-phase-pill {
+                width: 102px !important;
+                height: 32px !important;
+                padding: 3px 8px !important;
+                border-radius: 11px !important;
+                justify-content: center !important;
+            }
+            #hud-phase-pill > div:first-child {
+                font-size: 9px !important;
+                line-height: 1 !important;
+            }
+            #hud-hits-pill {
+                display: none !important;
+            }
+            /* Minimapa compacto logo abaixo dos status no canto superior direito */
+            #hud-minimap-pill {
+                position: fixed !important;
+                top: 42px !important;
+                right: calc(12px + env(safe-area-inset-right, 0px)) !important;
+                margin-top: 0 !important;
+                padding: 3px !important;
+                border-radius: 12px !important;
+            }
+            #minimap-canvas {
+                width: 72px !important;
+                height: 52px !important;
+                border-radius: 8px !important;
+            }
+            #hud-minimap-label {
+                display: none !important;
+            }
+            /* Zoom discreto ao lado esquerdo do minimapa */
+            #hud-zoom-pill {
+                position: fixed !important;
+                top: 42px !important;
+                right: calc(92px + env(safe-area-inset-right, 0px)) !important;
+                padding: 2px 5px !important;
+                border-radius: 11px !important;
+                gap: 3px !important;
+            }
+            #hud-zoom-pill button {
+                width: 24px !important;
+                height: 24px !important;
+                font-size: 12px !important;
+                border-radius: 7px !important;
+            }
+            /* Barra lateral esquerda compacta no topo-esquerdo sem colidir com controles inferiores */
+            #hud-left-buttons {
+                position: fixed !important;
+                top: 42px !important;
+                left: calc(12px + env(safe-area-inset-left, 0px)) !important;
+                margin: 0 !important;
+                z-index: 25 !important;
+            }
+            #hud-left-stack {
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 5px !important;
+                margin-bottom: 0 !important;
+                max-width: 220px !important;
+            }
+            #hud-left-stack > button {
+                width: 42px !important;
+                height: 42px !important;
+                border-radius: 12px !important;
+                border-width: 2px !important;
+                box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28) !important;
+            }
+            #hud-left-stack > button span:first-child {
+                font-size: 15px !important;
+                line-height: 1.1 !important;
+            }
+            #hud-left-stack > button span:nth-child(2) {
+                font-size: 8px !important;
+                margin-top: 1px !important;
+            }
+            #emote-bar {
+                flex-direction: row !important;
+                padding: 3px 5px !important;
+                border-radius: 12px !important;
+            }
+            #emote-bar > div:first-child {
+                display: none !important;
+            }
+            #emote-buttons-list {
+                flex-direction: row !important;
+            }
+            #emote-buttons-list button {
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 13px !important;
+            }
+            /* =========================================================
+               CONTROLES HORIZONTAIS DEDICADOS (POLEGAR ESQUERDO E DIREITO)
+               ========================================================= */
+            #bottom-controls {
+                position: fixed !important;
+                left: calc(14px + env(safe-area-inset-left, 0px)) !important;
+                right: calc(14px + env(safe-area-inset-right, 0px)) !important;
+                bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+                width: auto !important;
+                margin: 0 !important;
+                transform: none !important;
+                align-items: flex-end !important;
+                justify-content: space-between !important;
+                z-index: 26 !important;
+            }
+            /* Analógico esquerdo ergonômico para modo deitado */
+            #joystick-zone {
+                width: 112px !important;
+                height: 112px !important;
+                border-width: 2.5px !important;
+                background: rgba(15, 23, 42, 0.52) !important;
+            }
+            #joystick-knob {
+                width: 46px !important;
+                height: 46px !important;
+            }
+            /* Arco de botões ergonômico no polegar direito */
+            #bottom-action-cluster {
+                position: relative !important;
+                width: 176px !important;
+                height: 138px !important;
+                display: block !important;
+                pointer-events: none !important;
+            }
+            #bottom-secondary-actions,
+            #bottom-primary-actions {
+                display: contents !important;
+            }
+            #bottom-action-cluster button {
+                pointer-events: auto !important;
+                position: absolute !important;
+                touch-action: none !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+            }
+            /* Botão principal (Pular / Freio) bem no alcance natural do polegar direito */
+            #btn-touch-jump {
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 72px !important;
+                height: 72px !important;
+                border-width: 3px !important;
+            }
+            #btn-touch-jump-svg {
+                width: 32px !important;
+                height: 32px !important;
+            }
+            /* Botão Correr / Ré à esquerda do Pular */
+            #btn-touch-run {
+                right: 82px !important;
+                bottom: 4px !important;
+                width: 54px !important;
+                height: 54px !important;
+                font-size: 10px !important;
+                padding: 4px !important;
+            }
+            /* Botão Veículo / Buzina acima do Pular em arco */
+            #btn-toggle-vehicle,
+            #btn-drive-horn {
+                right: 6px !important;
+                bottom: 82px !important;
+                width: 50px !important;
+                height: 50px !important;
+                border-width: 2.5px !important;
+            }
+            /* Botão Emote na diagonal superior esquerda do arco */
+            #btn-touch-emote {
+                right: 66px !important;
+                bottom: 68px !important;
+                width: 48px !important;
+                height: 48px !important;
+                border-width: 2.5px !important;
+            }
+            #bottom-secondary-actions button span:first-child {
+                font-size: 18px !important;
+            }
+            #bottom-secondary-actions button span:nth-child(2) {
+                font-size: 8px !important;
+            }
+            /* Prompt de interação centralizado embaixo entre o analógico e os botões */
+            #npc-prompt {
+                bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+            #npc-prompt button {
+                padding: 8px 16px !important;
+                font-size: 13px !important;
+            }
+            /* Banner de minijogo e feedback mais compactos no topo */
+            #minigame-hud-banner {
+                top: 40px !important;
+            }
+            #minigame-hud-banner > div {
+                padding: 5px 14px !important;
+                border-radius: 18px !important;
+                border-width: 3px !important;
+            }
+            #mg-question {
+                font-size: 18px !important;
+                margin: 2px 0 !important;
+            }
+            #feedback-banner {
+                top: 40px !important;
             }
         }
     </style>
@@ -194,7 +448,7 @@
         
         <!-- BARRA SUPERIOR -->
         <div id="hud-top-bar" class="w-full flex items-start justify-between gap-2">
-            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 pointer-events-auto max-w-[58%] sm:max-w-none">
+            <div id="hud-top-left" class="flex flex-wrap items-center gap-1.5 sm:gap-2 pointer-events-auto max-w-[58%] sm:max-w-none">
                 <button onclick="openModal('settings-modal')" title="Configurações e Áudio" class="hud-pill w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-white hover:bg-slate-800 transition cursor-pointer shrink-0">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
@@ -217,18 +471,18 @@
                 </div>
             </div>
 
-            <div class="flex flex-col items-end gap-1.5 pointer-events-auto shrink-0">
+            <div id="hud-top-right" class="flex flex-col items-end gap-1.5 pointer-events-auto shrink-0">
                 <div class="flex items-center gap-1.5 sm:gap-2">
-                    <div class="hud-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl flex items-center gap-1.5" title="Estrelas (Pontuação)">
+                    <div id="hud-stars-pill" class="hud-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl flex items-center gap-1.5" title="Estrelas (Pontuação)">
                         <span class="text-lg sm:text-2xl drop-shadow">⭐</span>
                         <span id="hud-stars" class="text-white font-black text-base sm:text-xl tracking-wide">0</span>
                     </div>
-                    <div class="hud-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl flex items-center gap-1.5 border-amber-400/50" title="Moedas para Lojas">
+                    <div id="hud-coins-pill" class="hud-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl flex items-center gap-1.5 border-amber-400/50" title="Moedas para Lojas">
                         <span class="text-lg sm:text-2xl drop-shadow">🪙</span>
                         <span id="hud-coins" class="text-amber-300 font-black text-base sm:text-xl tracking-wide">0</span>
                     </div>
                 </div>
-                <div class="hud-pill px-3 py-1.5 rounded-2xl flex flex-col items-end gap-1 w-36 sm:w-44">
+                <div id="hud-phase-pill" class="hud-pill px-3 py-1.5 rounded-2xl flex flex-col items-end gap-1 w-36 sm:w-44">
                     <div class="w-full flex items-center justify-between text-[11px] sm:text-xs font-black text-white">
                         <span id="hud-phase-label" class="text-sky-300">Fase: 1/10</span>
                         <span id="hud-phase-count" class="text-amber-300">0/5</span>
@@ -237,16 +491,16 @@
                         <div id="hud-phase-bar" class="h-full bg-gradient-to-r from-amber-400 to-lime-400 transition-all duration-300" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-white">
+                <div id="hud-hits-pill" class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-white">
                     <span id="hud-hits">Acertos: 0</span>
                     <span class="text-slate-400">|</span>
                     <span id="hud-combo" class="text-amber-300">Combo: 0x 🔥</span>
                 </div>
-                <div class="hud-pill p-1.5 rounded-2xl flex flex-col items-center mt-0.5 shadow-xl">
+                <div id="hud-minimap-pill" class="hud-pill p-1.5 rounded-2xl flex flex-col items-center mt-0.5 shadow-xl">
                     <canvas id="minimap-canvas" width="150" height="120" class="w-28 h-22 sm:w-32 sm:h-24 rounded-xl block"></canvas>
-                    <div class="text-[9px] sm:text-[10px] font-black text-slate-300 mt-1 tracking-wide">🗺️ Mapa da Cidade</div>
+                    <div id="hud-minimap-label" class="text-[9px] sm:text-[10px] font-black text-slate-300 mt-1 tracking-wide">🗺️ Mapa da Cidade</div>
                 </div>
-                <div class="hud-pill px-2 py-1 rounded-2xl flex items-center gap-1.5 shadow-lg" title="Ajustar Zoom da Câmera">
+                <div id="hud-zoom-pill" class="hud-pill px-2 py-1 rounded-2xl flex items-center gap-1.5 shadow-lg" title="Ajustar Zoom da Câmera">
                     <button onclick="adjustCameraZoom(2.2)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-700/90 hover:bg-slate-600 active:scale-90 text-white font-black text-base flex items-center justify-center border border-white/20 cursor-pointer" aria-label="Diminuir Zoom (Afastar)">➖</button>
                     <span class="text-[10px] font-black text-slate-300 px-0.5">🔍</span>
                     <button onclick="adjustCameraZoom(-2.2)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-700/90 hover:bg-slate-600 active:scale-90 text-white font-black text-base flex items-center justify-center border border-white/20 cursor-pointer" aria-label="Aumentar Zoom (Aproximar)">➕</button>
@@ -256,7 +510,7 @@
 
         <!-- BOTÕES LATERAIS ESQUERDOS -->
         <div id="hud-left-buttons" class="flex items-center justify-between my-auto">
-            <div class="flex flex-col gap-2 pointer-events-auto mb-16 sm:mb-8">
+            <div id="hud-left-stack" class="flex flex-col gap-2 pointer-events-auto mb-16 sm:mb-8">
                 <button onclick="openModal('wardrobe-modal')" class="btn-cartoon w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl bg-gradient-to-b from-purple-500 to-indigo-600 flex flex-col items-center justify-center text-white cursor-pointer">
                     <span class="text-xl sm:text-3xl drop-shadow">👕</span>
                     <span class="text-[10px] sm:text-xs font-black mt-0.5 drop-shadow">Roupas</span>
@@ -390,12 +644,16 @@
 
         <!-- CONTROLES INFERIORES -->
         <div id="bottom-controls" class="w-full flex items-end justify-between pointer-events-none pb-1">
-            <div id="joystick-zone" class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-slate-900/45 border-2 border-white/35 backdrop-blur-sm pointer-events-auto flex items-center justify-center shadow-lg">
-                <div id="joystick-knob" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/80 border-2 border-slate-300 shadow-md pointer-events-none transition-transform duration-75"></div>
+            <div id="joystick-zone" class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-slate-900/45 border-2 border-white/35 backdrop-blur-sm pointer-events-auto flex items-center justify-center shadow-lg select-none">
+                <span class="absolute top-1.5 left-1/2 -translate-x-1/2 text-[10px] text-white/40 pointer-events-none">▲</span>
+                <span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[10px] text-white/40 pointer-events-none">▼</span>
+                <span class="absolute left-1.5 top-1/2 -translate-y-1/2 text-[10px] text-white/40 pointer-events-none">◀</span>
+                <span class="absolute right-1.5 top-1/2 -translate-y-1/2 text-[10px] text-white/40 pointer-events-none">▶</span>
+                <div id="joystick-knob" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/85 border-2 border-slate-300 shadow-md pointer-events-none"></div>
             </div>
 
-            <div class="flex flex-col items-end gap-2 pointer-events-auto">
-                <div class="flex items-center gap-2">
+            <div id="bottom-action-cluster" class="flex flex-col items-end gap-2 pointer-events-auto">
+                <div id="bottom-secondary-actions" class="flex items-center gap-2">
                     <!-- Botão Buzinar ao dirigir carro ou moto -->
                     <button id="btn-drive-horn" onclick="honkPlayerHorn()" title="Buzinar (H)" class="hidden w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-b from-rose-500 to-red-600 border-3 border-white text-white font-black flex flex-col items-center justify-center shadow-xl active:scale-95 cursor-pointer">
                         <span class="text-xl sm:text-2xl leading-none">📯</span>
@@ -410,15 +668,16 @@
                         <span id="btn-vehicle-key-hint" class="text-[9px] font-black uppercase mt-0.5">Q</span>
                     </button>
                 </div>
-                <div class="flex items-end gap-2.5 sm:gap-3">
+                <div id="bottom-primary-actions" class="flex items-end gap-2.5 sm:gap-3">
                     <button id="btn-touch-run" class="w-14 h-14 sm:w-16 sm:h-16 p-2 rounded-full bg-slate-900/65 border-2 border-white/50 text-white font-black text-[11px] sm:text-xs flex flex-col items-center justify-center transition shadow-lg cursor-pointer">
                         <span id="btn-touch-run-icon">⚡</span>
                         <span id="btn-touch-run-label">Correr</span>
                     </button>
-                    <button id="btn-touch-jump" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-900/65 border-4 border-white/55 text-white flex items-center justify-center active:scale-95 active:bg-sky-500 shadow-xl cursor-pointer">
+                    <button id="btn-touch-jump" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-900/65 border-4 border-white/55 text-white flex flex-col items-center justify-center active:scale-95 active:bg-sky-500 shadow-xl cursor-pointer">
                         <svg id="btn-touch-jump-svg" class="w-8 h-8 sm:w-10 sm:h-10" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 4l-8 8h5v8h6v-8h5z"/>
                         </svg>
+                        <span id="btn-touch-jump-label" class="text-[9px] font-black uppercase leading-none mt-0.5">Pular</span>
                     </button>
                 </div>
             </div>
@@ -4712,6 +4971,10 @@
                 runIcon.textContent = '⚡';
             }
         }
+        const jumpLabel = document.getElementById('btn-touch-jump-label');
+        if (jumpLabel) {
+            jumpLabel.textContent = activeDrivingVehicle ? 'Frear' : 'Pular';
+        }
     }
 
     function honkPlayerHorn() {
@@ -4785,6 +5048,14 @@
         addRotatedBoxCollider(vehObj.pos.x, vehObj.pos.z, vehObj.halfW * 2, vehObj.halfL * 2, vehObj.rotY, vehObj.colTag);
 
         activeDrivingVehicle = null;
+        if (touchRunToggle) {
+            touchRunToggle = false;
+            const btnRun = document.getElementById('btn-touch-run');
+            if (btnRun) {
+                btnRun.classList.remove('bg-amber-500');
+                btnRun.classList.add('bg-slate-900/65');
+            }
+        }
         cameraRig.distance = getDefaultCameraDistance();
         rebuildPlayerModel();
         updateDeviceHintsUI();
@@ -4802,12 +5073,20 @@
         crosswalkCooldown: 0
     };
 
+    function isCompactMobilePortrait() {
+        return window.innerWidth < 768 && window.innerHeight > window.innerWidth;
+    }
+    function isCompactMobileLandscape() {
+        return window.innerWidth > window.innerHeight && window.innerHeight <= 540;
+    }
     function getDefaultCameraDistance() {
-        return (window.innerWidth < 768 && window.innerHeight > window.innerWidth) ? 11.5 : 6.4;
+        if (isCompactMobilePortrait()) return 11.5;
+        if (isCompactMobileLandscape()) return 7.6;
+        return 6.4;
     }
     const cameraRig = {
         yaw: 0,
-        pitch: (window.innerWidth < 768 && window.innerHeight > window.innerWidth) ? 0.32 : 0.22,
+        pitch: isCompactMobilePortrait() ? 0.32 : 0.22,
         distance: getDefaultCameraDistance()
     };
     function adjustCameraZoom(delta) {
@@ -5021,6 +5300,7 @@
     }
 
     let isDraggingCam = false;
+    let camTouchId = null;
     let pointerDownX = 0;
     let pointerDownY = 0;
     let lastPointerX = 0;
@@ -5053,54 +5333,81 @@
         isDraggingCam = false;
     });
 
+    // Suporte multi-toque independente: permite girar a câmera com o dedo direito enquanto anda com o polegar esquerdo
     canvas.addEventListener('touchstart', (e) => {
         setInputDevice('touch');
-        if (e.touches.length === 1) {
-            isDraggingCam = true;
-            pointerDownX = e.touches[0].clientX;
-            pointerDownY = e.touches[0].clientY;
-            lastPointerX = e.touches[0].clientX;
-            lastPointerY = e.touches[0].clientY;
-        } else if (e.touches.length === 2) {
+        const camTouches = Array.from(e.touches).filter(t => t.target === canvas);
+        if (camTouches.length === 1) {
+            const t = e.changedTouches[0];
+            if (t && t.target === canvas) {
+                isDraggingCam = true;
+                camTouchId = t.identifier;
+                pointerDownX = t.clientX;
+                pointerDownY = t.clientY;
+                lastPointerX = t.clientX;
+                lastPointerY = t.clientY;
+            }
+        } else if (camTouches.length >= 2) {
             isDraggingCam = false;
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            camTouchId = null;
+            const dx = camTouches[0].clientX - camTouches[1].clientX;
+            const dy = camTouches[0].clientY - camTouches[1].clientY;
             pinchStartDist = Math.hypot(dx, dy);
         }
     }, { passive: true });
 
     canvas.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 1 && isDraggingCam) {
-            const dx = e.touches[0].clientX - lastPointerX;
-            const dy = e.touches[0].clientY - lastPointerY;
-            lastPointerX = e.touches[0].clientX;
-            lastPointerY = e.touches[0].clientY;
-            cameraRig.yaw -= dx * 0.008;
-            cameraRig.pitch = Math.max(0.10, Math.min(1.05, cameraRig.pitch + dy * 0.007));
-        } else if (e.touches.length === 2 && pinchStartDist > 0) {
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const camTouches = Array.from(e.touches).filter(t => t.target === canvas);
+        if (camTouches.length >= 2 && pinchStartDist > 0) {
+            const dx = camTouches[0].clientX - camTouches[1].clientX;
+            const dy = camTouches[0].clientY - camTouches[1].clientY;
             const dist = Math.hypot(dx, dy);
             const delta = (pinchStartDist - dist) * 0.045;
             cameraRig.distance = Math.max(4.2, Math.min(24, cameraRig.distance + delta));
             pinchStartDist = dist;
+            return;
+        }
+        if (isDraggingCam && camTouchId !== null) {
+            const t = Array.from(e.changedTouches).find(ct => ct.identifier === camTouchId);
+            if (t) {
+                const dx = t.clientX - lastPointerX;
+                const dy = t.clientY - lastPointerY;
+                lastPointerX = t.clientX;
+                lastPointerY = t.clientY;
+                cameraRig.yaw -= dx * 0.0085;
+                cameraRig.pitch = Math.max(0.10, Math.min(1.05, cameraRig.pitch + dy * 0.0075));
+            }
         }
     }, { passive: true });
 
-    canvas.addEventListener('touchend', (e) => {
-        if (isDraggingCam && e.changedTouches.length > 0) {
-            const t = e.changedTouches[0];
-            if (Math.hypot(t.clientX - pointerDownX, t.clientY - pointerDownY) < 12) {
-                handleWorldTapOrClick(t.clientX, t.clientY);
+    function endCanvasTouch(e) {
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            const t = e.changedTouches[i];
+            if (t.identifier === camTouchId) {
+                if (isDraggingCam && Math.hypot(t.clientX - pointerDownX, t.clientY - pointerDownY) < 12) {
+                    handleWorldTapOrClick(t.clientX, t.clientY);
+                }
+                isDraggingCam = false;
+                camTouchId = null;
             }
         }
-        isDraggingCam = false;
-        pinchStartDist = 0;
-    });
+        if (Array.from(e.touches).filter(t => t.target === canvas).length < 2) {
+            pinchStartDist = 0;
+        }
+    }
+    canvas.addEventListener('touchend', endCanvasTouch);
+    canvas.addEventListener('touchcancel', endCanvasTouch);
 
     const joyZone = document.getElementById('joystick-zone');
     const joyKnob = document.getElementById('joystick-knob');
     let joyTouchId = null;
+
+    function resetJoystick() {
+        joyTouchId = null;
+        joyVec.x = 0;
+        joyVec.y = 0;
+        joyKnob.style.transform = 'translate(0px, 0px)';
+    }
 
     function updateJoystickFromClient(cx, cy) {
         const rect = joyZone.getBoundingClientRect();
@@ -5121,13 +5428,16 @@
 
     joyZone.addEventListener('touchstart', (e) => {
         setInputDevice('touch');
+        e.preventDefault();
         e.stopPropagation();
+        if (joyTouchId !== null) return;
         const t = e.changedTouches[0];
         joyTouchId = t.identifier;
         updateJoystickFromClient(t.clientX, t.clientY);
-    }, { passive: true });
+    }, { passive: false });
 
     joyZone.addEventListener('touchmove', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         for (let i = 0; i < e.changedTouches.length; i++) {
             const t = e.changedTouches[i];
@@ -5135,15 +5445,19 @@
                 updateJoystickFromClient(t.clientX, t.clientY);
             }
         }
-    }, { passive: true });
+    }, { passive: false });
 
     joyZone.addEventListener('touchend', (e) => {
         for (let i = 0; i < e.changedTouches.length; i++) {
             if (e.changedTouches[i].identifier === joyTouchId) {
-                joyTouchId = null;
-                joyVec.x = 0;
-                joyVec.y = 0;
-                joyKnob.style.transform = 'translate(0px, 0px)';
+                resetJoystick();
+            }
+        }
+    });
+    joyZone.addEventListener('touchcancel', (e) => {
+        for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === joyTouchId) {
+                resetJoystick();
             }
         }
     });
@@ -5152,19 +5466,28 @@
     btnTouchJump.addEventListener('touchstart', (e) => {
         setInputDevice('touch');
         e.preventDefault();
+        e.stopPropagation();
         touchJumpHeld = true;
         triggerJump();
-    });
-    btnTouchJump.addEventListener('touchend', () => { touchJumpHeld = false; });
-    btnTouchJump.addEventListener('mousedown', () => { touchJumpHeld = true; });
+    }, { passive: false });
+    btnTouchJump.addEventListener('touchend', (e) => { e.stopPropagation(); touchJumpHeld = false; });
+    btnTouchJump.addEventListener('touchcancel', () => { touchJumpHeld = false; });
+    btnTouchJump.addEventListener('mousedown', (e) => { e.stopPropagation(); touchJumpHeld = true; triggerJump(); });
     btnTouchJump.addEventListener('mouseup', () => { touchJumpHeld = false; });
-    btnTouchJump.addEventListener('click', triggerJump);
 
     const btnTouchRun = document.getElementById('btn-touch-run');
-    btnTouchRun.addEventListener('click', () => {
+    function toggleTouchRun(e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
         touchRunToggle = !touchRunToggle;
         btnTouchRun.classList.toggle('bg-amber-500', touchRunToggle);
         btnTouchRun.classList.toggle('bg-slate-900/65', !touchRunToggle);
+    }
+    btnTouchRun.addEventListener('touchstart', (e) => {
+        setInputDevice('touch');
+        toggleTouchRun(e);
+    }, { passive: false });
+    btnTouchRun.addEventListener('click', (e) => {
+        if (e.detail > 0) toggleTouchRun(e);
     });
 
     // =========================================================================
@@ -8703,11 +9026,22 @@
     window.addEventListener('pagehide', autoSaveNow);
     window.addEventListener('beforeunload', autoSaveNow);
 
-    window.addEventListener('resize', () => {
+    function handleViewportChange() {
+        const w = window.innerWidth;
+        const h = Math.max(1, window.innerHeight);
         camera.fov = getResponsiveCameraFOV();
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(w, h);
+        if (!activeDrivingVehicle) {
+            cameraRig.distance = getDefaultCameraDistance();
+        }
+        updateDeviceHintsUI();
+    }
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(handleViewportChange, 120);
+        setTimeout(handleViewportChange, 350);
     });
 
     // =========================================================================
